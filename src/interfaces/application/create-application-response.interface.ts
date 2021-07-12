@@ -1,19 +1,7 @@
-import { ClientType } from '../../types/ClientType'
-import { VehicleType } from '../../types/VehicleType'
-import { IssuesType } from '../../types/IssuesType'
-import { Status } from '../../types/Status.enum'
+import { IApplication } from './application.interface'
 
 export interface ICreateApplicationResponse {
-  application: {
-    client: ClientType
-    vehicle: VehicleType
-    issues: IssuesType
-    status: Status
-    createdAt: string
-    startedAt: string
-    closedAt: string
-    closed: boolean
-  }
+  application: IApplication
   error: string | null
   status: number
 }

@@ -26,7 +26,7 @@ export class ApplicationController {
 
     const createApplicationResponse: ICreateApplicationResponse = await this.applicationServiceClient
       .send('application_create', {
-        clientId: createClientResponse.clientId,
+        clientId: createClientResponse.client.id,
         application,
       })
       .toPromise()
@@ -64,6 +64,7 @@ export class ApplicationController {
     const addApplicationResponse: AppApplicationToExistingClientResponse = await this.applicationServiceClient
       .send('application_add_to_existing_client', {
         client: getClientByIdResponse.client,
+        clientId: getClientByIdResponse.client.id,
         vehicle: application.vehicle,
         issues: application.issues,
       })

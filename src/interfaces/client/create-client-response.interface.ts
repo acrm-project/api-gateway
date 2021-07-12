@@ -1,11 +1,7 @@
+import { IClient } from './client.interface'
+
 export interface ICreateClientResponse {
-  clientId: number
-  client: {
-    name: string
-    surname: string
-    phoneNumber: string
-    email: string
-  }
+  client: IClient
   error: string | null
   status: number
 }

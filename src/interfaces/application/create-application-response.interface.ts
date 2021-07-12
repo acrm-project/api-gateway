@@ -1,7 +1,7 @@
-import { ClientType } from '../types/ClientType'
-import { VehicleType } from '../types/VehicleType'
-import { IssuesType } from '../types/IssuesType'
-import { Status } from '../types/Status.enum'
+import { ClientType } from '../../types/ClientType'
+import { VehicleType } from '../../types/VehicleType'
+import { IssuesType } from '../../types/IssuesType'
+import { Status } from '../../types/Status.enum'
 
 export interface ICreateApplicationResponse {
   application: {
@@ -14,6 +14,6 @@ export interface ICreateApplicationResponse {
     closedAt: string
     closed: boolean
   }
-  error: string
+  error: string | null
   status: number
 }

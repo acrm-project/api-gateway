@@ -18,7 +18,7 @@ export class ApplicationController {
     private readonly clientServiceClient: ClientProxy,
   ) {}
 
-  @Post()
+  @Post('/create')
   public async createApplicationFromScratch(@Body() application: CreateApplicationFromScratchDto) {
     const createClientResponse: ICreateClientResponse = await this.clientServiceClient
       .send('client_create', application.client)
@@ -46,6 +46,7 @@ export class ApplicationController {
     }
   }
 
+  @Post('/add')
   public async addApplicationToExistingClient(@Body() application: AddApplicationToExistingClientDto) {
     const getClientByIdResponse: IGetClientByIdResponse = await this.clientServiceClient
       .send('client_find_by_id', application.clientId)

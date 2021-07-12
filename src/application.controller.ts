@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, HttpStatus, Inject, Post } from '@nestjs/common'
+import { Body, Controller, Get, HttpException, HttpStatus, Inject, Param, Post } from '@nestjs/common'
 import { ClientProxy } from '@nestjs/microservices'
 
 import { CreateApplicationFromScratchDto } from './dto/create-application-from-scratch.dto'
@@ -7,7 +7,8 @@ import { AddApplicationToExistingClientDto } from './dto/add-application-to-exis
 import { ICreateClientResponse } from './interfaces/client/create-client-response.interface'
 import { IGetClientByIdResponse } from './interfaces/client/get-client-by-id-pesponse.interface'
 import { ICreateApplicationResponse } from './interfaces/application/create-application-response.interface'
-import { AppApplicationToExistingClientResponse } from './interfaces/application/add-application-to-existing-client-response.interface'
+import { AddApplicationToExistingClientResponse } from './interfaces/application/add-application-to-existing-client-response.interface'
+import { IGetApplicationByIdResponse } from './interfaces/application/get-application-by-id-response.interface'
 
 @Controller('applications')
 export class ApplicationController {
@@ -61,7 +62,7 @@ export class ApplicationController {
       )
     }
 
-    const addApplicationResponse: AppApplicationToExistingClientResponse = await this.applicationServiceClient
+    const addApplicationResponse: AddApplicationToExistingClientResponse = await this.applicationServiceClient
       .send('application_add_to_existing_client', {
         client: getClientByIdResponse.client,
         clientId: getClientByIdResponse.client.id,
@@ -73,6 +74,27 @@ export class ApplicationController {
     return {
       status: HttpStatus.CREATED,
       application: addApplicationResponse.application,
+    }
+  }
+
+  @Get('/:id')
+  public async getApplicationById(@Param('id') id: string) {
+    const getApplicationByIdPesponse: IGetApplicationByIdResponse = await this.applicationServiceClient
+      .send('application_find_by_id', id)
+      .toPromise()
+
+    if (getApplicationByIdPesponse.status !== HttpStatus.OK) {
+      throw new HttpException(
+        {
+          error: getApplicationByIdPesponse.error,
+        },
+        getApplicationByIdPesponse.status,
+      )
+    }
+
+    return {
+      status: HttpStatus.CREATED,
+      application: getApplicationByIdPesponse.application,
     }
   }
 }

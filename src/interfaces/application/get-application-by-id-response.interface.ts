@@ -1,7 +1,7 @@
 import { IApplication } from './application.interface'
 
-export interface AddApplicationToExistingClientResponse {
+export interface IGetApplicationByIdResponse {
   application: IApplication
-  error: string | null
   status: number
+  error: string | null
 }

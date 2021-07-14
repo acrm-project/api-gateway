@@ -5,7 +5,7 @@ import { CreateApplicationFromScratchDto } from './dto/create-application-from-s
 import { AddApplicationToExistingClientDto } from './dto/add-application-to-existing-client.dto'
 
 import { ICreateClientResponse } from './interfaces/client/create-client-response.interface'
-import { IGetClientByIdResponse } from './interfaces/client/get-client-by-id-pesponse.interface'
+import { IGetClientByIdResponse } from './interfaces/client/get-client-by-id-response.interface'
 import { ICreateApplicationResponse } from './interfaces/application/create-application-response.interface'
 import { AddApplicationToExistingClientResponse } from './interfaces/application/add-application-to-existing-client-response.interface'
 import { IGetApplicationByIdResponse } from './interfaces/application/get-application-by-id-response.interface'

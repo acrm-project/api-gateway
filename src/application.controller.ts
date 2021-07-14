@@ -53,7 +53,7 @@ export class ApplicationController {
       .send('client_find_by_id', application.clientId)
       .toPromise()
 
-    if (getClientByIdResponse.status !== HttpStatus.OK) {
+    if (getClientByIdResponse.error) {
       throw new HttpException(
         {
           error: getClientByIdResponse.error,
@@ -83,7 +83,7 @@ export class ApplicationController {
       .send('application_find_by_id', id)
       .toPromise()
 
-    if (getApplicationByIdPesponse.status !== HttpStatus.OK) {
+    if (getApplicationByIdPesponse.error) {
       throw new HttpException(
         {
           error: getApplicationByIdPesponse.error,

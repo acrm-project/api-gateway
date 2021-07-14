@@ -15,15 +15,12 @@ export class ClientController {
       .toPromise()
 
     if (getClientByIdResponse.status !== HttpStatus.OK) {
-      if (getClientByIdResponse.status !== HttpStatus.OK) {
-        throw new HttpException(
-          {
-            error: getClientByIdResponse.error,
-          },
-          getClientByIdResponse.status,
-        )
-      }
-      34
+      throw new HttpException(
+        {
+          error: getClientByIdResponse.error,
+        },
+        getClientByIdResponse.status,
+      )
     }
 
     return {

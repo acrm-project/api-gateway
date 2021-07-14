@@ -1,5 +1,6 @@
-import { Controller, Get, HttpException, HttpStatus, Inject, Param, Post } from '@nestjs/common'
+import { Controller, Get, HttpException, Inject, Param } from '@nestjs/common'
 import { ClientProxy } from '@nestjs/microservices'
+import { lastValueFrom, Observable } from 'rxjs'
 
 import { IGetClientByIdResponse } from './interfaces/client/get-client-by-id-response.interface'
 import { IGetClientBySearchQueryResponse } from './interfaces/client/get-client-by-search-query-response.interface'
@@ -10,9 +11,9 @@ export class ClientController {
 
   @Get('/:id')
   public async getClientById(@Param('id') id: string) {
-    const getClientByIdResponse: IGetClientByIdResponse = await this.clientServiceClient
-      .send('client_find_by_id', id)
-      .toPromise()
+    const observableStream: Observable<IGetClientByIdResponse> = this.clientServiceClient.send('client_find_by_id', id)
+
+    const getClientByIdResponse: IGetClientByIdResponse = await lastValueFrom(observableStream)
 
     if (getClientByIdResponse.error) {
       throw new HttpException(
@@ -31,9 +32,12 @@ export class ClientController {
 
   @Get('/:query')
   public async getClientBySearchQuery(@Param('query') query: string) {
-    const getClientBySearchQueryResponse: IGetClientBySearchQueryResponse = await this.clientServiceClient
-      .send('client_by_search_query', query)
-      .toPromise()
+    const observableStream: Observable<IGetClientBySearchQueryResponse> = this.clientServiceClient.send(
+      'client_by_search_query',
+      query,
+    )
+
+    const getClientBySearchQueryResponse: IGetClientBySearchQueryResponse = await lastValueFrom(observableStream)
 
     if (getClientBySearchQueryResponse.error) {
       throw new HttpException(

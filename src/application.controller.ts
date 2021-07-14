@@ -42,7 +42,7 @@ export class ApplicationController {
     }
 
     return {
-      status: HttpStatus.CREATED,
+      status: createApplicationResponse.status,
       application: createApplicationResponse.application,
     }
   }
@@ -72,7 +72,7 @@ export class ApplicationController {
       .toPromise()
 
     return {
-      status: HttpStatus.CREATED,
+      status: getClientByIdResponse.status,
       application: addApplicationResponse.application,
     }
   }
@@ -93,7 +93,7 @@ export class ApplicationController {
     }
 
     return {
-      status: HttpStatus.CREATED,
+      status: getApplicationByIdPesponse.status,
       application: getApplicationByIdPesponse.application,
     }
   }

@@ -32,7 +32,7 @@ export class ApplicationController {
       })
       .toPromise()
 
-    if (createApplicationResponse.status !== HttpStatus.CREATED) {
+    if (createApplicationResponse.error) {
       throw new HttpException(
         {
           error: createApplicationResponse.error,

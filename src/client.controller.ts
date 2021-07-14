@@ -14,7 +14,7 @@ export class ClientController {
       .send('client_find_by_id', id)
       .toPromise()
 
-    if (getClientByIdResponse.status !== HttpStatus.OK) {
+    if (getClientByIdResponse.error) {
       throw new HttpException(
         {
           error: getClientByIdResponse.error,
@@ -29,12 +29,13 @@ export class ClientController {
     }
   }
 
+  @Get('/:query')
   public async getClientBySearchQuery(@Param('query') query: string) {
     const getClientBySearchQueryResponse: IGetClientBySearchQueryResponse = await this.clientServiceClient
       .send('client_by_search_query', query)
       .toPromise()
 
-    if (getClientBySearchQueryResponse.status !== HttpStatus.OK) {
+    if (getClientBySearchQueryResponse.error) {
       throw new HttpException(
         {
           error: getClientBySearchQueryResponse.error,

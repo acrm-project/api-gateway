@@ -1,8 +1,14 @@
-import { IssuesType } from 'src/types/IssuesType'
-import { VehicleType } from 'src/types/VehicleType'
-
 export class AddApplicationToExistingClientDto {
   readonly clientId: string
-  readonly vehicle: VehicleType
-  readonly issues: IssuesType
+
+  // vehicle
+  readonly brand: string
+  readonly model: string
+  readonly yearOfIssue: string
+  readonly registrationNumber: string
+  readonly engineSpecification: string
+  readonly VIN: string
+
+  // issues
+  readonly description: string
 }

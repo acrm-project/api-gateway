@@ -1,9 +1,18 @@
-import { ClientType } from '../types/ClientType'
-import { VehicleType } from '../types/VehicleType'
-import { IssuesType } from '../types/IssuesType'
-
 export class CreateApplicationFromScratchDto {
-  readonly client: ClientType
-  readonly vehicle: VehicleType
-  readonly issues: IssuesType
+  // client
+  readonly name: string
+  readonly surname: string
+  readonly phoneNumber: string
+  readonly email: string
+
+  // vehicle
+  readonly brand: string
+  readonly model: string
+  readonly yearOfIssue: string
+  readonly registrationNumber: string
+  readonly engineSpecification: string
+  readonly VIN: string
+
+  // issues
+  readonly description: string
 }

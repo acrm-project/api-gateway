@@ -22,19 +22,22 @@ export class ApplicationController {
 
   @Post('/create')
   public async createApplicationFromScratch(@Body() application: CreateApplicationFromScratchDto) {
-    const observableStream: Observable<ICreateClientResponse> = this.clientServiceClient.send(
+    const observableStreamClient: Observable<ICreateClientResponse> = this.clientServiceClient.send(
       'client_create',
       application.client,
     )
 
-    const createClientResponse: ICreateClientResponse = await lastValueFrom(observableStream)
+    const createClientResponse: ICreateClientResponse = await lastValueFrom(observableStreamClient)
 
-    const createApplicationResponse: ICreateApplicationResponse = await this.applicationServiceClient
-      .send('application_create', {
+    const observableStreamApplication: Observable<ICreateApplicationResponse> = this.applicationServiceClient.send(
+      'application_create',
+      {
         clientId: createClientResponse.client.id,
         application,
-      })
-      .toPromise()
+      },
+    )
+
+    const createApplicationResponse: ICreateApplicationResponse = await lastValueFrom(observableStreamApplication)
 
     if (createApplicationResponse.error) {
       throw new HttpException(

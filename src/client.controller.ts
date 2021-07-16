@@ -1,4 +1,4 @@
-import { Controller, Get, HttpException, Inject, Param } from '@nestjs/common'
+import { Controller, Get, Inject, Param } from '@nestjs/common'
 import { ClientProxy } from '@nestjs/microservices'
 import { lastValueFrom, Observable } from 'rxjs'
 

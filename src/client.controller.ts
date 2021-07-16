@@ -15,19 +15,7 @@ export class ClientController {
 
     const getClientByIdResponse: IGetClientByIdResponse = await lastValueFrom(observableStream)
 
-    if (getClientByIdResponse.error) {
-      throw new HttpException(
-        {
-          error: getClientByIdResponse.error,
-        },
-        getClientByIdResponse.status,
-      )
-    }
-
-    return {
-      status: getClientByIdResponse.status,
-      client: getClientByIdResponse.client,
-    }
+    return getClientByIdResponse
   }
 
   @Get('/:query')
@@ -39,18 +27,6 @@ export class ClientController {
 
     const getClientBySearchQueryResponse: IGetClientBySearchQueryResponse = await lastValueFrom(observableStream)
 
-    if (getClientBySearchQueryResponse.error) {
-      throw new HttpException(
-        {
-          error: getClientBySearchQueryResponse.error,
-        },
-        getClientBySearchQueryResponse.status,
-      )
-    }
-
-    return {
-      status: getClientBySearchQueryResponse.status,
-      client: getClientBySearchQueryResponse.client,
-    }
+    return getClientBySearchQueryResponse
   }
 }

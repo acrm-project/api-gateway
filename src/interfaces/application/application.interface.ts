@@ -1,7 +1,7 @@
-import { ClientType } from 'src/types/ClientType'
-import { IssuesType } from 'src/types/IssuesType'
-import { Status } from 'src/types/Status.enum'
-import { VehicleType } from 'src/types/VehicleType'
+import { ClientType } from 'src/types/client.type'
+import { IssuesType } from 'src/types/issues.type'
+import { Status } from 'src/types/status.enum'
+import { VehicleType } from 'src/types/vehicle.type'
 
 export interface IApplication {
   client: ClientType

@@ -1,6 +1,6 @@
-import { ClientType } from 'src/types/ClientType'
-import { IssuesType } from 'src/types/IssuesType'
-import { VehicleType } from 'src/types/VehicleType'
+import { ClientType } from '../types/client.type'
+import { IssuesType } from 'src/types/issues.type'
+import { VehicleType } from 'src/types/vehicle.type'
 
 export class CreateApplicationFromScratchDto {
   readonly client: ClientType

@@ -5,5 +5,5 @@ import { VehicleType } from 'src/types/vehicle.type'
 export class CreateApplicationFromScratchDto {
   readonly client: ClientType
   readonly vehicle: VehicleType
-  readonly Issues: IssuesType
+  readonly issues: IssuesType
 }

@@ -33,24 +33,21 @@ export class ApplicationController {
       'application_create',
       {
         clientId: createClientResponse.client.id,
-        application,
+        application: {
+          vehicle: application.vehicle,
+          issues: application.issues,
+        },
       },
     )
 
     const createApplicationResponse: ICreateApplicationResponse = await lastValueFrom(observableStreamApplication)
 
-    if (createApplicationResponse.error) {
-      throw new HttpException(
-        {
-          error: createApplicationResponse.error,
-        },
-        createApplicationResponse.status,
-      )
-    }
-
     return {
       status: createApplicationResponse.status,
-      application: createApplicationResponse.application,
+      data: {
+        client: createClientResponse.client,
+        application: createApplicationResponse.application,
+      },
     }
   }
 
@@ -74,10 +71,11 @@ export class ApplicationController {
 
     const observableStreamApplication: Observable<AddApplicationToExistingClientResponse> =
       this.applicationServiceClient.send('application_add_to_existing_client', {
-        client: getClientByIdResponse.client,
         clientId: getClientByIdResponse.client.id,
-        vehicle: application.vehicle,
-        issues: application.issues,
+        application: {
+          vehicle: application.vehicle,
+          issues: application.issues,
+        },
       })
 
     const addApplicationResponse: AddApplicationToExistingClientResponse = await lastValueFrom(

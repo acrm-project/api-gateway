@@ -21,7 +21,7 @@ export class ClientController {
   @Get('/:query')
   public async getClientBySearchQuery(@Param('query') query: string) {
     const observableStream: Observable<IGetClientBySearchQueryResponse> = this.clientServiceClient.send(
-      'client_by_search_query',
+      'client_find_by_search_query',
       query,
     )
 

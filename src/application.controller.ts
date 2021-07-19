@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, Inject, Param, Post } from '@nestjs/common'
+import { Body, Controller, Get, Inject, Param, Post } from '@nestjs/common'
 import { ClientProxy } from '@nestjs/microservices'
 import { lastValueFrom, Observable } from 'rxjs'
 
@@ -61,12 +61,10 @@ export class ApplicationController {
     const getClientByIdResponse: IGetClientByIdResponse = await lastValueFrom(observableStreamClient)
 
     if (getClientByIdResponse.error) {
-      throw new HttpException(
-        {
-          error: getClientByIdResponse.error,
-        },
-        getClientByIdResponse.status,
-      )
+      return {
+        error: getClientByIdResponse.error,
+        status: getClientByIdResponse.status,
+      }
     }
 
     const observableStreamApplication: Observable<AddApplicationToExistingClientResponse> =
@@ -92,18 +90,16 @@ export class ApplicationController {
   public async getApplicationById(@Param('id') id: string) {
     const observableStream: Observable<IGetApplicationByIdResponse> = this.applicationServiceClient.send(
       'application_find_by_id',
-      id,
+      +id,
     )
 
     const getApplicationByIdPesponse: IGetApplicationByIdResponse = await lastValueFrom(observableStream)
 
     if (getApplicationByIdPesponse.error) {
-      throw new HttpException(
-        {
-          error: getApplicationByIdPesponse.error,
-        },
-        getApplicationByIdPesponse.status,
-      )
+      return {
+        error: getApplicationByIdPesponse.error,
+        status: getApplicationByIdPesponse.status,
+      }
     }
 
     return {
